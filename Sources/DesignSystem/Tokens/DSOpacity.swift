@@ -10,7 +10,7 @@ public enum DSOpacity {
     /// Semi-transparent – 0.3
     public static let low: CGFloat = 0.3
     /// Disabled state – 0.5
-    public static let disabled: CGFloat = 0.5
+    public static let disabled: CGFloat = medium
     /// Transparent – 0.0
     public static let transparent: CGFloat = 0.0
 }
