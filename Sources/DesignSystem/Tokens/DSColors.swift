@@ -5,10 +5,14 @@ public enum DSColors {
     // MARK: - Brand
     public static let brandPrimary = color(named: "BrandPrimary")
     public static let brandSecondary = color(named: "BrandSecondary")
+    public static let accent = color(named: "Accent")
 
     // MARK: - Background
     public static let backgroundPrimary = color(named: "BackgroundPrimary")
     public static let backgroundSecondary = color(named: "BackgroundSecondary")
+
+    // MARK: - Surface
+    public static let surface = color(named: "Surface")
 
     // MARK: - Text
     public static let textPrimary = color(named: "TextPrimary")

@@ -2,6 +2,15 @@ import UIKit
 
 public final class DSTextField: UIView {
 
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = DSTypography.font(size: .footnote, weight: .medium)
+        label.textColor = DSColors.textPrimary
+        label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     public let textField: UITextField = {
         let tf = UITextField()
         tf.font = DSTypography.font(size: .body)
@@ -29,6 +38,13 @@ public final class DSTextField: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
+    public var title: String? {
+        didSet {
+            titleLabel.text = title
+            titleLabel.isHidden = title == nil
+        }
+    }
 
     public var placeholder: String? {
         didSet {
@@ -62,12 +78,19 @@ public final class DSTextField: UIView {
     }
 
     private func setupView() {
+        titleLabel.isHidden = true
+
+        addSubview(titleLabel)
         addSubview(containerView)
         containerView.addSubview(textField)
         addSubview(errorLabel)
 
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+
+            containerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: DSSpacing.xxxs),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
 
