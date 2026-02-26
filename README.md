@@ -1,6 +1,6 @@
-# DesignSystem
+# DesignSystem — Grão Nobre
 
-A comprehensive iOS Design System library built with **100% UIKit** (no SwiftUI), distributed via Swift Package Manager (SPM). This library provides a complete set of design tokens, reusable UI components, and extensions to help you build consistent, accessible iOS applications.
+A comprehensive iOS Design System library built with **100% UIKit** (no SwiftUI), distributed via Swift Package Manager (SPM). This library provides a complete set of design tokens, reusable UI components, and extensions to help you build consistent, accessible iOS applications with the **Grão Nobre** brand identity.
 
 ## Features
 
@@ -9,8 +9,8 @@ A comprehensive iOS Design System library built with **100% UIKit** (no SwiftUI)
 ✅ **Dark Mode Support** — All colors have light and dark variants via `.xcassets`  
 ✅ **Dynamic Type** — Typography scales with user preferences using `UIFontMetrics`  
 ✅ **ViewCode Only** — No Storyboards or XIBs required  
-✅ **Type-Safe Tokens** — Colors, typography, spacing, and border radius  
-✅ **Reusable Components** — Buttons, text fields, and labels  
+✅ **Type-Safe Tokens** — Colors, typography, spacing, border radius, and shadows  
+✅ **Reusable Components** — Buttons, text fields, labels, cards, badges, and dividers  
 ✅ **Well-Tested** — Comprehensive test coverage  
 
 ## Requirements
@@ -137,12 +137,16 @@ class MyViewController: UIViewController {
 All colors support light and dark mode automatically.
 
 #### Brand Colors
-- `DSColors.brandPrimary` — Primary brand color (blue)
-- `DSColors.brandSecondary` — Secondary brand color (teal)
+- `DSColors.brandPrimary` — Primary brand color (coffee brown)
+- `DSColors.brandSecondary` — Secondary brand color (noble gold)
+- `DSColors.accent` — Accent color (warm brown)
 
 #### Background Colors
-- `DSColors.backgroundPrimary` — Primary background (white/dark)
-- `DSColors.backgroundSecondary` — Secondary background (light gray/dark gray)
+- `DSColors.backgroundPrimary` — Primary background (warm white/dark)
+- `DSColors.backgroundSecondary` — Secondary background (warm cream/dark gray)
+
+#### Surface Colors
+- `DSColors.surface` — Card/surface background (white/dark)
 
 #### Text Colors
 - `DSColors.textPrimary` — Primary text (black/white)
@@ -200,6 +204,21 @@ All spacing values follow a 4pt grid system.
 - `DSBorderRadius.large` — 16pt
 - `DSBorderRadius.circular(for: CGFloat)` — Returns size/2 for circular corners
 
+### Shadow (`DSShadow`)
+
+Elevation-based shadow system for depth and hierarchy.
+
+#### Elevation Levels
+- `.none` — No shadow
+- `.low` — Subtle shadow (offset: 2pt, radius: 4pt, opacity: 8%)
+- `.medium` — Standard shadow (offset: 4pt, radius: 8pt, opacity: 12%)
+- `.high` — Prominent shadow (offset: 8pt, radius: 16pt, opacity: 16%)
+
+#### Usage
+```swift
+DSShadow.apply(.medium, to: myView.layer)
+```
+
 ## Components
 
 ### DSButton
@@ -238,9 +257,10 @@ button.isLoading = false
 
 ### DSTextField
 
-A text field with error state support and consistent styling.
+A text field with title label, error state support, and consistent styling.
 
 #### Features
+- Title/header label support
 - Placeholder support with semantic colors
 - Error message display with animation
 - Rounded corners and consistent padding
@@ -249,6 +269,7 @@ A text field with error state support and consistent styling.
 #### Usage
 ```swift
 let textField = DSTextField()
+textField.title = "Email"
 textField.placeholder = "Enter email"
 textField.text = "user@example.com"
 
@@ -282,6 +303,63 @@ let label = DSLabel(
     alignment: .center
 )
 label.text = "Hello, World!"
+```
+
+### DSCard
+
+A container view with elevation shadow and rounded corners, ideal for content grouping.
+
+#### Features
+- Configurable elevation shadow (none, low, medium, high)
+- Customizable corner radius
+- Surface color background
+- Content padding support
+- Dark mode support
+
+#### Usage
+```swift
+let card = DSCard(elevation: .medium, cornerRadius: DSBorderRadius.large)
+card.translatesAutoresizingMaskIntoConstraints = false
+
+let contentLabel = DSLabel(fontSize: .body)
+contentLabel.text = "Card content here"
+card.addContent(contentLabel, padding: DSSpacing.sm)
+```
+
+### DSDivider
+
+A styled separator line for visual content division.
+
+#### Features
+- Horizontal and vertical orientation
+- Customizable color and thickness
+- Auto Layout ready
+
+#### Usage
+```swift
+let divider = DSDivider(orientation: .horizontal)
+// or with custom properties
+let customDivider = DSDivider(orientation: .vertical, color: DSColors.border, thickness: 2)
+```
+
+### DSBadge
+
+A small colored tag/label for categories, statuses, or highlights.
+
+#### Variants
+- `.primary` — Brand primary color badge
+- `.secondary` — Brand secondary color badge
+- `.success` — Green success badge
+- `.warning` — Orange warning badge
+- `.error` — Red error badge
+
+#### Usage
+```swift
+let badge = DSBadge(variant: .success)
+badge.text = "Available"
+
+let categoryBadge = DSBadge(variant: .primary)
+categoryBadge.text = "Premium"
 ```
 
 ## Extensions
