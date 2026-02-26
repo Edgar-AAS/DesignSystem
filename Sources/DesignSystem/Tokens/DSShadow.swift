@@ -8,7 +8,7 @@ public enum DSShadow {
         case medium
         case high
 
-        var offset: CGSize {
+        public var offset: CGSize {
             switch self {
             case .none:   return .zero
             case .low:    return CGSize(width: 0, height: 2)
@@ -17,7 +17,7 @@ public enum DSShadow {
             }
         }
 
-        var radius: CGFloat {
+        public var radius: CGFloat {
             switch self {
             case .none:   return 0
             case .low:    return 4
@@ -26,7 +26,7 @@ public enum DSShadow {
             }
         }
 
-        var opacity: Float {
+        public var opacity: Float {
             switch self {
             case .none:   return 0
             case .low:    return 0.08
